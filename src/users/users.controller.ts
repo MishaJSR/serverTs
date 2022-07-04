@@ -1,20 +1,29 @@
-import { Controller, Get } from "@nestjs/common";
-
+import { CreateUsersDto } from './dto/users.dto';
+import { UsersService } from './users.service';
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { ObjectId } from 'mongoose';
 
 @Controller('/users')
 export class UsersController{
-    create(){
+    constructor(private usersService: UsersService){}
 
+    @Post()
+    create(@Body() dto: CreateUsersDto){
+        return this.usersService.create(dto)
     }
 
     @Get()
     getAll(){
-        return 'Work'
+        return this.usersService.getAll()
     }
-    getOne(){
-        
+
+    @Get(':id')
+    getOne(@Param('id') id: ObjectId){
+        return this.usersService.getOne(id)
     }
-    delete(){
-        
+
+    @Delete(':id')
+    delete(@Param('id')id: ObjectId){
+        return this.usersService.delete(id)
     }
 }

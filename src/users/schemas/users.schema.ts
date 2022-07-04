@@ -11,7 +11,7 @@ export class Users {
   id_user: number;
 
   @Prop()
-  name: string;
+  username: string;
 
   @Prop()
   surname: string;
@@ -29,7 +29,7 @@ export class Users {
   avaImg: string;
 
   @Prop()
-  passwd: string;
+  isAuth: boolean;
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Gifts'}]})
   gifts: Gifts[];

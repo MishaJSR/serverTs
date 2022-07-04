@@ -21,4 +21,4 @@ export class Gifts {
 
 }
 
-export const UsersSchema = SchemaFactory.createForClass(Gifts);
+export const GiftsSchema = SchemaFactory.createForClass(Gifts);

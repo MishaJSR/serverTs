@@ -31,6 +31,12 @@ export class Users {
   @Prop()
   isAuth: boolean;
 
+  @Prop()
+  audio: string;
+
+  @Prop()
+  picture: string;
+
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Gifts'}]})
   gifts: Gifts[];
 }

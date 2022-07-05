@@ -1,3 +1,4 @@
+import { FileService, FileType } from './../file/file.service';
 import { CreateUsersDto } from './dto/users.dto';
 import { Gifts, GiftsDocument } from './schemas/gifts.schema';
 import { Users, UsersDocument } from './schemas/users.schema';
@@ -11,10 +12,13 @@ import { CreateGiftsDto } from './dto/gifts.dto';
 export class UsersService{
 
     constructor(@InjectModel(Users.name) private usersModel: Model<UsersDocument>,
-                @InjectModel(Gifts.name) private giftsModel: Model<GiftsDocument>) {}
+                @InjectModel(Gifts.name) private giftsModel: Model<GiftsDocument>,
+                private fileService: FileService) {}
 
-    async create(dto: CreateUsersDto): Promise<Users>{
-        const users = await this.usersModel.create({...dto, status: 'Empty status', about: 'Nothing', isAuth: false})
+    async create(dto: CreateUsersDto, picture, audio): Promise<Users>{
+        const picturePath = this.fileService.createFile(FileType.IMAGE, picture)
+        const audioPath = this.fileService.createFile(FileType.AUDIO, audio)
+        const users = await this.usersModel.create({...dto, status: 'Empty status', about: 'Nothing', isAuth: false, picture: picturePath, audio: audioPath})
         return users
     }
     async getAll(): Promise<Users[]>{

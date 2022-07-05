@@ -1,6 +1,6 @@
 export class CreateUsersDto {
     readonly id_user;
-    readonly name;
+    readonly username;
     readonly surname;
     readonly email
     readonly avaImg

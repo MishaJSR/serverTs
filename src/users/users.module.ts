@@ -4,6 +4,7 @@ import { Module } from "@nestjs/common";
 import { UsersController } from "./users.controller";
 import { UsersService } from "./users.service";
 import { Gifts, GiftsSchema } from './schemas/gifts.schema';
+import { FileService } from 'src/file/file.service';
 
 
 @Module({
@@ -12,7 +13,7 @@ import { Gifts, GiftsSchema } from './schemas/gifts.schema';
         MongooseModule.forFeature([{name: Gifts.name, schema: GiftsSchema}]),
     ],
     controllers: [UsersController],
-    providers: [UsersService]
+    providers: [UsersService, FileService]
 })
 
 export class UsersModule {}

@@ -4,6 +4,7 @@ import { Users, UsersDocument } from './schemas/users.schema';
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, ObjectId } from 'mongoose';
+import { CreateGiftsDto } from './dto/gifts.dto';
 
 
 @Injectable()
@@ -21,12 +22,20 @@ export class UsersService{
         return users
     }
     async getOne(id: ObjectId): Promise<Users>{
-        const users = await this.usersModel.findById(id)
+        const users = await this.usersModel.findById(id).populate('gifts')
         return users
     }
     async delete(id: ObjectId): Promise<ObjectId>{
         const users = await this.usersModel.findByIdAndDelete(id);
         return users.id
+    }
+
+    async addGift(dto: CreateGiftsDto): Promise<Gifts>{
+        const users = await this.usersModel.findById(dto.userId);
+        const gifts = await this.giftsModel.create({...dto})
+        users.gifts.push(gifts._id)
+        await users.save();
+        return gifts
     }
 
 }

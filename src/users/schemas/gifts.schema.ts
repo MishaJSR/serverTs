@@ -17,7 +17,7 @@ export class Gifts {
   cod: string;
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}]})
-  user: Users;
+  users: Users;
 
 }
 

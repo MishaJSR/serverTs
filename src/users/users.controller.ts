@@ -2,6 +2,7 @@ import { CreateUsersDto } from './dto/users.dto';
 import { UsersService } from './users.service';
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { ObjectId } from 'mongoose';
+import { CreateGiftsDto } from './dto/gifts.dto';
 
 @Controller('/users')
 export class UsersController{
@@ -26,4 +27,10 @@ export class UsersController{
     delete(@Param('id')id: ObjectId){
         return this.usersService.delete(id)
     }
+
+    @Post('/gifts')
+    addGift(@Body() dto: CreateGiftsDto){
+        return this.usersService.addGift(dto)
+    }
+
 }

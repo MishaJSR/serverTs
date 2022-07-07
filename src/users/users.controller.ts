@@ -5,6 +5,8 @@ import { ObjectId } from 'mongoose';
 import { CreateGiftsDto } from './dto/gifts.dto';
 import { FileFieldsInterceptor} from '@nestjs/platform-express';
 import { CreateFriendsDto } from './dto/fiends.dto';
+import { CreatePostsDto } from './dto/posts.dto';
+import { CreateLikesDto } from './dto/likes.dto';
 
 @Controller('/users')
 export class UsersController{
@@ -48,6 +50,23 @@ export class UsersController{
     @Post('/friends')
     addFriend(@Body() dto: CreateFriendsDto){
         return this.usersService.addFriend(dto)
+    }
+
+    @Post('/posts')
+    addPost(@Body() dto: CreatePostsDto){
+        return this.usersService.addPost(dto)
+    }
+
+    @Delete('/posts/:id')
+    deletePost(@Param('id')id: ObjectId){
+        return this.usersService.deletePost(id)
+    }
+
+    
+
+    @Post('/likes')
+    addLikes(@Body() dto: CreateLikesDto){
+        return this.usersService.addLikes(dto)
     }
 
 }

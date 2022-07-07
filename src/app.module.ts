@@ -1,3 +1,4 @@
+import { PostsModule } from './posts/posts.module';
 import { FileModule } from './file/file.module';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -13,6 +14,7 @@ import * as path from 'path';
           }),
         MongooseModule.forRoot('mongodb+srv://adminMixa:4815162342@cluster0.4c27r.mongodb.net/?retryWrites=true&w=majority'),
         UsersModule,
+        PostsModule,
         FileModule,
         
     ]

@@ -4,6 +4,7 @@ import { Body, Controller, Delete, Get, Param, Post, UploadedFiles, UseIntercept
 import { ObjectId } from 'mongoose';
 import { CreateGiftsDto } from './dto/gifts.dto';
 import { FileFieldsInterceptor} from '@nestjs/platform-express';
+import { CreateFriendsDto } from './dto/fiends.dto';
 
 @Controller('/users')
 export class UsersController{
@@ -37,6 +38,16 @@ export class UsersController{
     @Post('/gifts')
     addGift(@Body() dto: CreateGiftsDto){
         return this.usersService.addGift(dto)
+    }
+
+    @Delete('/gifts/:id')
+    deleteGift(@Param('id')id: ObjectId){
+        return this.usersService.deleteGift(id)
+    }
+
+    @Post('/friends')
+    addFriend(@Body() dto: CreateFriendsDto){
+        return this.usersService.addFriend(dto)
     }
 
 }

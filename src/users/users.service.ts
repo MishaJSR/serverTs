@@ -6,6 +6,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, ObjectId } from 'mongoose';
 import { CreateGiftsDto } from './dto/gifts.dto';
+import { Friends, FriendsDocument } from './schemas/friends.schema';
+import { CreateFriendsDto } from './dto/fiends.dto';
 
 
 @Injectable()
@@ -13,6 +15,7 @@ export class UsersService{
 
     constructor(@InjectModel(Users.name) private usersModel: Model<UsersDocument>,
                 @InjectModel(Gifts.name) private giftsModel: Model<GiftsDocument>,
+                @InjectModel(Friends.name) private friendsModel: Model<FriendsDocument>,
                 private fileService: FileService) {}
 
     async create(dto: CreateUsersDto, picture, audio): Promise<Users>{
@@ -22,8 +25,8 @@ export class UsersService{
         return users
     }
     async getAll(): Promise<Users[]>{
-        const users = await this.usersModel.find()
-        return users
+        const users = await this.usersModel.find().populate('friends')
+        return users.friends[]
     }
     async getOne(id: ObjectId): Promise<Users>{
         const users = await this.usersModel.findById(id).populate('gifts')
@@ -40,6 +43,19 @@ export class UsersService{
         users.gifts.push(gifts._id)
         await users.save();
         return gifts
+    }
+
+    async deleteGift(id: ObjectId): Promise<ObjectId>{
+        const gifts = await this.giftsModel.findByIdAndDelete(id);
+        return gifts.id
+    }
+
+    async addFriend(dto: CreateFriendsDto): Promise<Friends>{
+        const users = await this.usersModel.findById(dto.userId);
+        const friends = await this.friendsModel.create({...dto})
+        users.friends.push(friends._id)
+        await users.save();
+        return friends
     }
 
 }

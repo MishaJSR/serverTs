@@ -1,6 +1,6 @@
 import { ObjectId } from "mongoose";
 
 export class CreateLikesDto {
-    readonly userId: ObjectId
+    readonly postId: ObjectId
     readonly id_adder: ObjectId
 }

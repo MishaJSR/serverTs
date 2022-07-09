@@ -1,7 +1,7 @@
 import { ObjectId } from "mongoose";
 
-export class CreateLikesDto {
-    readonly userId: ObjectId
+export class CreateComentsDto {
+    readonly postId: ObjectId
     readonly id_adder: ObjectId
     readonly text: String
 }

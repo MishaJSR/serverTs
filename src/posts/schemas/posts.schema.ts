@@ -18,10 +18,10 @@ export class Posts {
   text: string;
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Likes'}]})
-  likes: Likes;
+  likes: Likes[];
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Coments'}]})
-  coments: Coments;
+  coments: Coments[];
 }
 
 export const PostsSchema = SchemaFactory.createForClass(Posts);

@@ -1,4 +1,3 @@
-import { PostsDocument } from './schemas/posts.schema';
 import { FileService, FileType } from './../file/file.service';
 import { CreateUsersDto } from './dto/users.dto';
 import { Gifts, GiftsDocument } from './schemas/gifts.schema';
@@ -9,11 +8,6 @@ import { Model, ObjectId } from 'mongoose';
 import { CreateGiftsDto } from './dto/gifts.dto';
 import { Friends, FriendsDocument } from './schemas/friends.schema';
 import { CreateFriendsDto } from './dto/fiends.dto';
-import { Posts } from './schemas/posts.schema';
-import { Coments, ComentsDocument } from './schemas/coments.schema';
-import { Likes, LikesDocument } from './schemas/likes.schema';
-import { CreatePostsDto } from './dto/posts.dto';
-import { CreateLikesDto } from './dto/likes.dto';
 
 
 @Injectable()
@@ -22,19 +16,16 @@ export class UsersService{
     constructor(@InjectModel(Users.name) private usersModel: Model<UsersDocument>,
                 @InjectModel(Gifts.name) private giftsModel: Model<GiftsDocument>,
                 @InjectModel(Friends.name) private friendsModel: Model<FriendsDocument>,
-                @InjectModel(Posts.name) private postsModel: Model<PostsDocument>,
-                @InjectModel(Coments.name) private comentsModel: Model<ComentsDocument>,
-                @InjectModel(Likes.name) private likesModel: Model<LikesDocument>,
                 private fileService: FileService) {}
 
-    async create(dto: CreateUsersDto, picture, audio): Promise<Users>{
+    async create(dto: CreateUsersDto, picture): Promise<Users>{
         const picturePath = this.fileService.createFile(FileType.IMAGE, picture)
-        const audioPath = this.fileService.createFile(FileType.AUDIO, audio)
-        const users = await this.usersModel.create({...dto, status: 'Empty status', about: 'Nothing', isAuth: false, picture: picturePath, audio: audioPath})
+        // const audioPath = this.fileService.createFile(FileType.AUDIO, audio)
+        const users = await this.usersModel.create({...dto, status: 'Empty status', about: 'Nothing', isAuth: false, picture: picturePath})
         return users
     }
     async getAll(): Promise<Users[]>{
-        const users = await this.usersModel.find().populate('posts')
+        const users = await this.usersModel.find().populate('friends')
         return users
     }
     async getOne(id: ObjectId): Promise<Users>{
@@ -60,6 +51,7 @@ export class UsersService{
         return gifts.id
     }
 
+        
     async addFriend(dto: CreateFriendsDto): Promise<Friends>{
         const users = await this.usersModel.findById(dto.userId);
         const friends = await this.friendsModel.create({...dto})
@@ -73,27 +65,6 @@ export class UsersService{
         return friends.id
     }
 
-    async addPost(dto: CreatePostsDto): Promise<Posts>{
-        const users = await this.usersModel.findById(dto.userId);
-        const posts = await this.postsModel.create({...dto})
-        users.posts.push(posts._id)
-        await users.save();
-        return posts
-    }
-
-
-    async deletePost(id: ObjectId): Promise<ObjectId>{
-        const posts = await this.postsModel.findByIdAndDelete(id);
-        return posts.id
-    }
-
-    async addLikes(dto: CreateLikesDto): Promise<Likes>{
-        const users = await this.usersModel.findById(dto.userId);
-        const likes = await this.likesModel.create({...dto})
-        users.likes.push(likes._id)
-        await users.save();
-        return likes
-    }
     
 
 

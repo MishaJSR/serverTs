@@ -8,13 +8,17 @@ export type ComentsDocument = Coments & Document;
 @Schema()
 export class Coments {
   @Prop()
-  userId: string;
+  postId: string;
 
   @Prop()
   id_adder: string;
 
+  @Prop()
+  text: string;
+
+
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Posts'}]})
-  coments: Posts;
+  posts: Posts;
 
 }
 

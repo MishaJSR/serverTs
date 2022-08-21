@@ -1,3 +1,4 @@
+import { deleteUserDto } from './dto/delete.user.dto';
 import { createUserDto } from './dto/create.user.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './users.model';
@@ -14,8 +15,18 @@ export class UsersService {
         return user;
     }
 
+    async deleteUser(dto: deleteUserDto){
+        const user = await this.userRepostiory.destroy({
+            where: {
+                id: dto.id_delete
+            }
+        });
+        return user;
+    }
+
     async getAllUsers(){
         const users = await this.userRepostiory.findAll();
         return users;
     }
+
 }

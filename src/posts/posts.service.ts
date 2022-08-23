@@ -25,7 +25,7 @@ export class PostsService {
     }
 
     async getAllUsers(){
-        const post = await this.postsRepository.findAll();
+        const post = await this.postsRepository.findAll({include: {all: true}});
         return post;
     }
 }

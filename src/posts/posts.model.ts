@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { User } from "src/users/users.model";
 
 interface PostCreationAttr {
     id_adder: number;
@@ -22,7 +23,10 @@ export class Posts extends Model<Posts, PostCreationAttr>{
     text: string;
 
     @ApiProperty({example: '51а1п13п1', description: 'Указатель айди расположения поста'})
+    @ForeignKey(() => User)
     @Column({type: DataType.INTEGER, allowNull: false})
     id_postiton: number;
 
+    @BelongsTo(() => User)
+    author: User
 }

@@ -25,7 +25,7 @@ export class UsersService {
     }
 
     async getAllUsers(){
-        const users = await this.userRepostiory.findAll();
+        const users = await this.userRepostiory.findAll({include: {all: true}});
         return users;
     }
 

@@ -23,10 +23,10 @@ export class Coments extends Model<Coments, ComentsCreationAttr>{
     text: string;
 
     @ApiProperty({example: '51а1п13п1', description: 'Указатель айди расположения поста'})
-    // @ForeignKey(() => Posts)
+    @ForeignKey(() => Posts)
     @Column({type: DataType.INTEGER, allowNull: false})
     id_post: number;
 
-    // @BelongsTo(() => User)
-    // author: User
+    @BelongsTo(() => Posts)
+    author: Posts
 }

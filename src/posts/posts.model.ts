@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Coments } from "src/coments/coments.model";
 import { User } from "src/users/users.model";
 
 interface PostCreationAttr {
@@ -29,4 +30,7 @@ export class Posts extends Model<Posts, PostCreationAttr>{
 
     @BelongsTo(() => User)
     author: User
+
+    @HasMany(() => Coments)
+    coments: Coments[];
 }

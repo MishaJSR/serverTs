@@ -1,10 +1,11 @@
 import { PostsService } from './posts.service';
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Posts } from './posts.model';
 import { createPostDto } from './dto/create.posts.dto';
 import { deletePostDto } from './dto/delete.posts.dto';
 
+@ApiTags('Посты')
 @Controller('posts')
 export class PostsController {
     constructor(private postService: PostsService) {}

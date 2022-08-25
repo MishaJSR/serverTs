@@ -10,6 +10,7 @@ import { Posts } from 'src/posts/posts.model';
   providers: [UsersService],
   imports: [
     SequelizeModule.forFeature([User, Posts])
-  ]
+  ],
+   exports: [UsersService]
 })
 export class UsersModule {}

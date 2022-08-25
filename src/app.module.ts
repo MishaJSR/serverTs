@@ -1,3 +1,4 @@
+import { UsersService } from './users/users.service';
 
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
@@ -8,6 +9,7 @@ import { PostsModule } from './posts/posts.module';
 import { Posts } from "./posts/posts.model";
 import { ComentsModule } from "./coments/coments.module";
 import { Coments } from "./coments/coments.model";
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -31,7 +33,9 @@ envFilePath: `.${process.env.NODE_ENV}.env`
         }),
         UsersModule,
         PostsModule,
-        ComentsModule
-    ],
+        ComentsModule,
+        AuthModule,
+    
+    ]
 })
 export class AppModule {}

@@ -40,4 +40,11 @@ export class AuthService {
         }
         throw new UnauthorizedException({message: 'Некорректный емайл или пароль'})
     }
+
+    async getByToken(token: string){
+        const user = await this.jwtService.decode(token)
+        return user 
+    }
+
+    
 }

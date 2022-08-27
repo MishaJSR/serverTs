@@ -5,6 +5,8 @@ import { Posts } from "src/posts/posts.model";
 interface UserCreationAttr {
     email: string;
     password: string;
+    gender: string;
+    name: string;
 }
 
 @Table({tableName: 'users'})
@@ -22,8 +24,12 @@ export class User extends Model<User, UserCreationAttr>{
     password: string;
 
     @ApiProperty({example: 'Andrey', description: 'Имя пользователя'})
-    @Column({type: DataType.STRING, allowNull: true})
+    @Column({type: DataType.STRING, allowNull: false})
     name: string;
+
+    @ApiProperty({example: 'Andrey', description: 'Имя пользователя'})
+    @Column({type: DataType.STRING, allowNull: false})
+    gender: string;
 
 
     @HasMany(() => Posts)

@@ -1,7 +1,7 @@
 import { deleteUserDto } from './dto/delete.user.dto';
 import { UsersService } from './users.service';
 import { createUserDto } from './dto/create.user.dto';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './users.model';
 
@@ -27,8 +27,17 @@ export class UsersController {
 
     @ApiOperation({summary: 'Получение всех пользователей'})
     @ApiResponse({status: 200, type: [User]})
-    @Get('/all')
+    @Get('')
     getAll() {
         return this.userService.getAllUsers()
     }
+
+    @ApiOperation({summary: 'Получение всей информации о друзьях пользователя'})
+    @ApiResponse({status: 200, type: [User]})
+    @Get('/:id')
+    getUserById(@Param('id') id: number) {
+        return this.userService.getUserById(id);
+    }
+
+    
 }

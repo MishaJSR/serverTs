@@ -6,17 +6,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectModel(User) private postsRepository: typeof User){
+    constructor(@InjectModel(User) private userRepository: typeof User){
 
     }
 
     async createUser(dto: createUserDto){
-        const user = await this.postsRepository.create(dto);
+        const user = await this.userRepository.create(dto);
         return user;
     }
 
     async deleteUser(dto: deleteUserDto){
-        const user = await this.postsRepository.destroy({
+        const user = await this.userRepository.destroy({
             where: {
                 id: dto.id_delete
             }
@@ -25,12 +25,12 @@ export class UsersService {
     }
 
     async getAllUsers(){
-        const users = await this.postsRepository.findAll({include: {all: true}});
+        const users = await this.userRepository.findAll({include: {all: true}});
         return users;
     }
 
     async getUserByEmail(email: string) {
-        const user = await this.postsRepository.findOne({where: {email}, include: {all: true}})
+        const user = await this.userRepository.findOne({where: {email}, include: {all: true}})
         return user;
     }
 

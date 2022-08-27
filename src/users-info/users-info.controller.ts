@@ -1,5 +1,5 @@
 import { createInfoUserDto } from './dto/create.userInfo.dto';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsersInfoService } from './users-info.service';
 import { deleteInfoUserDto } from './dto/delete.userInfo.dto';
@@ -29,5 +29,12 @@ export class UsersInfoController {
     @Get()
     getAllInfo() {
         return this.usersInfoService.getAllInfo()
+    }
+
+    @ApiOperation({summary: 'Получение всей информации пользователей'})
+    @ApiResponse({status: 200, type: [UserInfo]})
+    @Get('/:id')
+    getByValue(@Param('id') id: number) {
+        return this.usersInfoService.getInfoById(id);
     }
 }

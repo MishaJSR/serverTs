@@ -28,4 +28,9 @@ export class UsersInfoService {
         const info = await this.userInfoRepository.findAll({include: {all: true}});
         return info;
     }
+
+    async getInfoById(id) {
+        const follow = await this.userInfoRepository.findAll({where: {user_id: id}, include: {all: true}})
+        return follow;
+    }
 }

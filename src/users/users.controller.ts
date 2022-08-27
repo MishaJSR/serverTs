@@ -17,6 +17,7 @@ export class UsersController {
         return this.userService.createUser(userDto)
     }
 
+
     @ApiOperation({summary: 'Удаление пользователя'})
     @ApiResponse({status: 200})
     @Post('/delete')

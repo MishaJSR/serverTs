@@ -25,21 +25,6 @@ export class User extends Model<User, UserCreationAttr>{
     @Column({type: DataType.STRING, allowNull: true})
     name: string;
 
-    @ApiProperty({example: 'Visocky', description: 'Фамилия пользователя'})
-    @Column({type: DataType.STRING, allowNull: true})
-    surname: string;
-
-    @ApiProperty({example: 'All OK', description: 'Статус пользователя'})
-    @Column({type: DataType.STRING, allowNull: true})
-    status: string;
-
-    @ApiProperty({example: 'http:/images/32f23235r', description: 'Ссылка на фото пользователя'})
-    @Column({type: DataType.STRING, allowNull: true})
-    img: string;
-
-    @ApiProperty({example: 'true', description: 'Онлайн пользователя'})
-    @Column({type: DataType.BOOLEAN, defaultValue: false})
-    isOnline: boolean;
 
     @HasMany(() => Posts)
     posts: Posts[];

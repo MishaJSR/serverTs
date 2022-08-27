@@ -10,6 +10,7 @@ import { Posts } from "./posts/posts.model";
 import { ComentsModule } from "./coments/coments.module";
 import { Coments } from "./coments/coments.model";
 import { AuthModule } from './auth/auth.module';
+import { UsersInfoModule } from './users-info/users-info.module';
 
 
 
@@ -35,7 +36,7 @@ envFilePath: `.${process.env.NODE_ENV}.env`
         PostsModule,
         ComentsModule,
         AuthModule,
-    
+        UsersInfoModule,
     ]
 })
 export class AppModule {}

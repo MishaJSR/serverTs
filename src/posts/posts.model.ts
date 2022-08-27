@@ -19,11 +19,11 @@ export class Posts extends Model<Posts, PostCreationAttr>{
     @Column({type: DataType.INTEGER, allowNull: false})
     id_adder: number;
 
-    @ApiProperty({example: '51а1п13п1', description: 'Текст поста'})
+    @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
     @Column({type: DataType.STRING, allowNull: true})
     text: string;
 
-    @ApiProperty({example: '51а1п13п1', description: 'Указатель айди расположения поста'})
+    @ApiProperty({example: '112', description: 'Указатель айди расположения поста'})
     @ForeignKey(() => User)
     @Column({type: DataType.INTEGER, allowNull: false})
     id_postiton: number;

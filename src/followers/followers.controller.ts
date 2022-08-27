@@ -11,28 +11,28 @@ import { FollowService } from './followers.service';
 export class FollowController {
     constructor(private followService: FollowService) {}
 
-    @ApiOperation({summary: 'Создание пользователя'})
+    @ApiOperation({summary: 'Создание друга'})
     @ApiResponse({status: 200, type: Follow})
     @Post()
     createUserInfo(@Body() userDto: createFollDto){
         return this.followService.createFollInfo(userDto)
     }
 
-    @ApiOperation({summary: 'Удаление инфы пользователя'})
+    @ApiOperation({summary: 'Удаление друга'})
     @ApiResponse({status: 200})
     @Post('/delete')
     deleteUserInfo(@Body() deleteDto: deleteFollDto){
         return this.followService.deleteFollInfo(deleteDto)
     }
 
-    @ApiOperation({summary: 'Получение всей информации пользователей'})
+    @ApiOperation({summary: 'Получение всей информации о друзей пользователя'})
     @ApiResponse({status: 200, type: [Follow]})
     @Get()
     getAllInfo() {
         return this.followService.getAllFoll()
     }
 
-    @ApiOperation({summary: 'Получение всей информации пользователей'})
+    @ApiOperation({summary: 'Получение всей информации о друзьях пользователя'})
     @ApiResponse({status: 200, type: [Follow]})
     @Get('/:id')
     getByValue(@Param('id') id: number) {

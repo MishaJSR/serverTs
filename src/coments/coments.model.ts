@@ -14,11 +14,11 @@ export class Coments extends Model<Coments, ComentsCreationAttr>{
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
-    @ApiProperty({example: '21', description: 'Айди того кто добавил пост'})
+    @ApiProperty({example: '21', description: 'Айди того кто добавляет комент'})
     @Column({type: DataType.INTEGER, allowNull: false})
     id_adder: number;
 
-    @ApiProperty({example: '51а1п13п1', description: 'Текст поста'})
+    @ApiProperty({example: '51а1п13п1', description: 'Текст комента'})
     @Column({type: DataType.STRING, allowNull: true})
     text: string;
 

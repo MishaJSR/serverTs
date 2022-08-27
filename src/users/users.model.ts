@@ -27,7 +27,7 @@ export class User extends Model<User, UserCreationAttr>{
     @Column({type: DataType.STRING, allowNull: false})
     name: string;
 
-    @ApiProperty({example: 'Andrey', description: 'Имя пользователя'})
+    @ApiProperty({example: 'Andrey', description: 'Гендер пользователя'})
     @Column({type: DataType.STRING, allowNull: false})
     gender: string;
 

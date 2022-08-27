@@ -10,21 +10,21 @@ import { deleteComentDto } from './dto/delete.coment.dto';
 export class ComentsController {
     constructor(private comentsService: ComentsService) {}
 
-    @ApiOperation({summary: 'Создание пользователя'})
+    @ApiOperation({summary: 'Создание комента'})
     @ApiResponse({status: 200, type: Coments})
     @Post()
     create(@Body() userDto: createComentDto){
         return this.comentsService.createUser(userDto)
     }
 
-    @ApiOperation({summary: 'Удаление пользователя'})
+    @ApiOperation({summary: 'Удаление комента'})
     @ApiResponse({status: 200})
     @Post('/delete')
     delete(@Body() deleteDto: deleteComentDto){
         return this.comentsService.deleteUser(deleteDto)
     }
 
-    @ApiOperation({summary: 'Получение всех пользователей'})
+    @ApiOperation({summary: 'Получение всех коментов'})
     @ApiResponse({status: 200, type: [Coments]})
     @Get()
     getAll() {

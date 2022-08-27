@@ -10,21 +10,21 @@ import { deletePostDto } from './dto/delete.posts.dto';
 export class PostsController {
     constructor(private postService: PostsService) {}
 
-    @ApiOperation({summary: 'Создание пользователя'})
+    @ApiOperation({summary: 'Создание поста'})
     @ApiResponse({status: 200, type: Posts})
     @Post()
     create(@Body() userDto: createPostDto){
         return this.postService.createUser(userDto)
     }
 
-    @ApiOperation({summary: 'Удаление пользователя'})
+    @ApiOperation({summary: 'Удаление поста'})
     @ApiResponse({status: 200})
     @Post('/delete')
     delete(@Body() deleteDto: deletePostDto){
         return this.postService.deleteUser(deleteDto)
     }
 
-    @ApiOperation({summary: 'Получение всех пользователей'})
+    @ApiOperation({summary: 'Получение всех постов'})
     @ApiResponse({status: 200, type: [Posts]})
     @Get()
     getAll() {

@@ -16,7 +16,7 @@ export class Follow extends Model<Follow, FolCreationAttr>{
     @Column({type: DataType.STRING, allowNull: false})
     user_id: string;
 
-    @ApiProperty({example: '14', description: 'id Follower пользователя'})
+    @ApiProperty({example: '14', description: 'друга пользователя'})
     @Column({type: DataType.STRING, allowNull: false})
     foll_id: string;
 

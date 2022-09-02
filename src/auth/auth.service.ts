@@ -1,3 +1,4 @@
+import { createLoginDto } from './dto/create.login.dto';
 import { UsersService } from './../users/users.service';
 import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { createUserDto } from 'src/users/dto/create.user.dto';
@@ -10,7 +11,7 @@ export class AuthService {
     constructor(private userService: UsersService,
         private jwtService: JwtService ) {}
 
-    async login ( userDto: createUserDto){
+    async login ( userDto: createLoginDto){
         const user = await this.validateUser(userDto)
         return this.generateToken(user)
     }
@@ -22,7 +23,6 @@ export class AuthService {
         }
         const hashPassword = await bcrypt.hash(userDto.password, 5);
         const user = await this.userService.createUser({...userDto, password: hashPassword})
-        const info = await this.userService.createUser({...userDto, password: hashPassword})
         return this.generateToken(user)
     }
 
@@ -34,13 +34,14 @@ export class AuthService {
         }
     }
 
-    async validateUser(userDto: createUserDto){
+    async validateUser(userDto: createLoginDto){
         const user = await this.userService.getUserByEmail(userDto.email)
+        if (!user) throw new UnauthorizedException({message: 'This Email is not find'});
         const passEq = await bcrypt.compare(userDto.password, user.password)
         if (user && passEq) {
             return user;
         }
-        throw new UnauthorizedException({message: 'Некорректный емайл или пароль'})
+        throw new UnauthorizedException({message: 'Incorect Password'})
     }
 
     async getByToken(token: string){

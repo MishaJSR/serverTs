@@ -31,6 +31,10 @@ export class User extends Model<User, UserCreationAttr>{
     @Column({type: DataType.STRING, allowNull: false})
     gender: string;
 
+    @ApiProperty({example: 'Andrey', description: 'AVA пользователя'})
+    @Column({type: DataType.STRING, defaultValue: ""})
+    ava: string;
+
 
     @HasMany(() => Posts)
     posts: Posts[];

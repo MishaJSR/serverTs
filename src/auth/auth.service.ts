@@ -50,5 +50,13 @@ export class AuthService {
         return user 
     }
 
+    async checkToken(token: string){
+        try {
+            const user = await this.jwtService.verify(token)
+            return user 
+        } catch (error) {
+            throw new UnauthorizedException({message: 'Incorect Token'})
+        }
+    }
     
 }

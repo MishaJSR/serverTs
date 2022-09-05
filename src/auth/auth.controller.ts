@@ -23,4 +23,9 @@ export class AuthController {
     getByToken(@Param('token') token: string){
         return this.authService.getByToken(token)
     }
+
+    @Get('/check/:token')
+    checkToken(@Param('token') token: string){
+        return this.authService.checkToken(token)
+    }
 }

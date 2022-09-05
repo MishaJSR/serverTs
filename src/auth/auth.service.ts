@@ -46,6 +46,7 @@ export class AuthService {
 
     async getByToken(token: string){
         const user = await this.jwtService.decode(token)
+        if (user === null) throw new UnauthorizedException({message: 'Incorect Token'})
         return user 
     }
 

@@ -1,3 +1,4 @@
+import { createInfoUserDtoEmpty } from './dto/create.userInfo.dto.empty';
 import { createInfoUserDto } from './dto/create.userInfo.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
@@ -12,6 +13,12 @@ export class UsersInfoService {
 
     async createUserInfo(dto: createInfoUserDto){
         const info = await this.userInfoRepository.create(dto);
+        return info;
+    }
+
+    
+    async logincreateUserInfo(user_id: number, gender: string, dto){
+        const info = await this.userInfoRepository.create({...dto, user_id, gender} );
         return info;
     }
 
@@ -30,7 +37,7 @@ export class UsersInfoService {
     }
 
     async getInfoById(id) {
-        const follow = await this.userInfoRepository.findAll({where: {user_id: id}, include: {all: true}})
+        const follow = await this.userInfoRepository.findOne({where: {user_id: id}, include: {all: true}})
         return follow;
     }
 }

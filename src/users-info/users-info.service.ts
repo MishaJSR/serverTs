@@ -17,7 +17,7 @@ export class UsersInfoService {
     }
 
     
-    async logincreateUserInfo(user_id: number, gender: string, dto){
+    async logincreateUserInfo(user_id: number, gender: string, dto: createInfoUserDtoEmpty){
         const info = await this.userInfoRepository.create({...dto, user_id, gender} );
         return info;
     }

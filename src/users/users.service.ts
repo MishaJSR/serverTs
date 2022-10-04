@@ -4,6 +4,8 @@ import { createUserDto } from './dto/create.user.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './users.model';
 import { Injectable } from '@nestjs/common';
+import { Posts } from 'src/posts/posts.model';
+import { Chats } from 'src/chats/chats.model';
 
 @Injectable()
 export class UsersService {
@@ -28,7 +30,14 @@ export class UsersService {
     }
 
     async getAllUsers(){
-        const users = await this.userRepository.findAll();
+        const users = await this.userRepository.findAll({
+            include: [{
+              model: Chats
+            },
+            {
+                model: Posts
+              }]
+          })
         return users;
     }
 

@@ -6,12 +6,13 @@ import { UsersService } from './users.service';
 import { User } from './users.model';
 import { Posts } from 'src/posts/posts.model';
 import { UsersInfoModule } from 'src/users-info/users-info.module';
+import { Chats } from 'src/chats/chats.model';
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService],
   imports: [
-    SequelizeModule.forFeature([User, Posts, UserInfo]),
+    SequelizeModule.forFeature([User, Posts, UserInfo, Chats]),
     UsersInfoModule
   ],
    exports: [UsersService]

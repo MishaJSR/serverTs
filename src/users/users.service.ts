@@ -6,6 +6,7 @@ import { User } from './users.model';
 import { Injectable } from '@nestjs/common';
 import { Posts } from 'src/posts/posts.model';
 import { Chats } from 'src/chats/chats.model';
+import { Genders } from 'src/genders/genders.model';
 
 @Injectable()
 export class UsersService {
@@ -36,18 +37,21 @@ export class UsersService {
             },
             {
                 model: Posts
+              },
+              {
+                model: Genders
               }]
           })
         return users;
     }
 
     async getUserByEmail(email: string) {
-        const user = await this.userRepository.findOne({where: {email}})
+        const user = await this.userRepository.findOne( {where: {email}})
         return user;
     }
 
     async getUserById(id: number) {
-        const user = await this.userRepository.findOne({where: {id: id}})
+        const user = await this.userRepository.findOne({include: {all: true},where: {id: id}})
         return user;
     }
 

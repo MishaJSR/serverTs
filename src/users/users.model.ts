@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Chats } from "src/chats/chats.model";
+import { Genders } from "src/genders/genders.model";
 import { Posts } from "src/posts/posts.model";
 
 interface UserCreationAttr {
@@ -42,4 +43,7 @@ export class User extends Model<User, UserCreationAttr>{
 
     @HasMany(() => Chats)
     chats: Chats[];
+
+    @HasMany(() => Genders)
+    genders: Genders[];
 }

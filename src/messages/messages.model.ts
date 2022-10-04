@@ -1,36 +1,36 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
-import { Coments } from "src/coments/coments.model";
-import { Messages } from "src/messages/messages.model";
-import { User } from "src/users/users.model";
+import { Chats } from "src/chats/chats.model";
 
-interface ChatCreationAttr {
-    one_id: number;
-    two_id: number;
+interface MessagesCreationAttr {
+    id_List: number;
+    id_Adder: number;
+    text: string
 }
 
-@Table({tableName: 'chat'})
-export class Chats extends Model<Chats, ChatCreationAttr>{
+@Table({tableName: 'messages'})
+export class Messages extends Model<Messages, MessagesCreationAttr>{
     @ApiProperty({example: '1', description: 'Уникальный идентификатор'})
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
     @ApiProperty({example: '112', description: 'Указатель айди расположения поста'})
-    @ForeignKey(() => User)
+    @ForeignKey(() => Chats)
     @Column({type: DataType.INTEGER, allowNull: false})
-    one_id: number;
+    id_List: number;
 
     @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
     @Column({type: DataType.STRING, allowNull: true})
-    two_id: number;
+    id_Adder: number;
+
+    
+    @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
+    @Column({type: DataType.STRING, allowNull: true})
+    text: string;
 
 
-
-    @BelongsTo(() => User)
-    author: User
-
-    @HasMany(() => Messages)
-    messages: Messages[];
+    @BelongsTo(() => Chats)
+    chats: Chats
 
     // @HasMany(() => Coments)
     // coments: Coments[];

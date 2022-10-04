@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { Messages } from 'src/messages/messages.model';
 import { Chats } from './chats.model';
 import {  createChatDto } from './dto/create.chats.dto';
 import {  deleteChatDto } from './dto/delete.chats.dto';
@@ -25,7 +26,11 @@ export class ChatsService {
     }
 
     async getAllUsers(){
-        const post = await this.postsRepository.findAll({include: {all: true}});
+        const post = await this.postsRepository.findAll({
+            include: [{
+              model: Messages
+            },]
+          })
         return post;
     }
 }

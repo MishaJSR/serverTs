@@ -14,6 +14,8 @@ import { UsersInfoModule } from './users-info/users-info.module';
 import { FollowersModule } from './followers/followers.module';
 import { ChatsModule } from './chats/chats.module';
 import { Chats } from './chats/chats.model';
+import { Messages } from './messages/messages.model';
+import { MessagesModule } from './messages/messages.module';
 
 
 
@@ -31,7 +33,7 @@ envFilePath: `.${process.env.NODE_ENV}.env`
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Posts, Coments, Chats],
+            models: [User, Posts, Coments, Chats, Messages],
             autoLoadModels: true
 
         }),
@@ -41,7 +43,8 @@ envFilePath: `.${process.env.NODE_ENV}.env`
         AuthModule,
         UsersInfoModule,
         FollowersModule,
-        ChatsModule
+        ChatsModule,
+        MessagesModule
     ]
 })
 export class AppModule {}

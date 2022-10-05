@@ -3,6 +3,7 @@ import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Chats } from "src/chats/chats.model";
 import { Genders } from "src/genders/genders.model";
 import { Posts } from "src/posts/posts.model";
+import { userPhotos } from "src/userPhotos/userPhotos.model";
 
 interface UserCreationAttr {
     email: string;
@@ -46,4 +47,7 @@ export class User extends Model<User, UserCreationAttr>{
 
     @HasMany(() => Genders)
     genders: Genders[];
+
+    @HasMany(() => userPhotos)
+    userPhotos: userPhotos[];
 }

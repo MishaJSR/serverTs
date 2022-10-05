@@ -7,6 +7,7 @@ import { Injectable } from '@nestjs/common';
 import { Posts } from 'src/posts/posts.model';
 import { Chats } from 'src/chats/chats.model';
 import { Genders } from 'src/genders/genders.model';
+import { userPhotos } from 'src/userPhotos/userPhotos.model';
 
 @Injectable()
 export class UsersService {
@@ -37,6 +38,9 @@ export class UsersService {
             },
             {
                 model: Posts
+              },
+              {
+                model: userPhotos
               },
               {
                 model: Genders

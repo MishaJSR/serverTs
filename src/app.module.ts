@@ -18,6 +18,9 @@ import { Messages } from './messages/messages.model';
 import { MessagesModule } from './messages/messages.module';
 import { Genders } from './genders/genders.model';
 import { GendersModule } from './genders/genders.module';
+import { userPhotosModule } from './userPhotos/userPhotos.module';
+import { userPhotos } from './userPhotos/userPhotos.model';
+import { FilesModule } from './files/files.module';
 
 
 
@@ -35,7 +38,7 @@ envFilePath: `.${process.env.NODE_ENV}.env`
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Posts, Coments, Chats, Messages, Genders],
+            models: [User, Posts, Coments, Chats, Messages, Genders, userPhotos],
             autoLoadModels: true
 
         }),
@@ -47,7 +50,9 @@ envFilePath: `.${process.env.NODE_ENV}.env`
         FollowersModule,
         ChatsModule,
         MessagesModule,
-        GendersModule
+        GendersModule,
+        userPhotosModule,
+        FilesModule
     ]
 })
 export class AppModule {}

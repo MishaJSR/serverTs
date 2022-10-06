@@ -7,12 +7,13 @@ import { User } from './users.model';
 import { Posts } from 'src/posts/posts.model';
 import { UsersInfoModule } from 'src/users-info/users-info.module';
 import { Chats } from 'src/chats/chats.model';
+import { Genders } from 'src/genders/genders.model';
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService],
   imports: [
-    SequelizeModule.forFeature([User, Posts, UserInfo, Chats]),
+    SequelizeModule.forFeature([User, Posts, UserInfo, Chats, Genders]),
     UsersInfoModule
   ],
    exports: [UsersService]

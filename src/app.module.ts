@@ -23,6 +23,8 @@ import { userPhotos } from './userPhotos/userPhotos.model';
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path'
+import { genderPhotosModule } from './genderPhotos/genderPhotos.module';
+import { genderPhotos } from './genderPhotos/genderPhotos.model';
 
 
 @Module({
@@ -42,7 +44,7 @@ envFilePath: `.${process.env.NODE_ENV}.env`
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Posts, Coments, Chats, Messages, Genders, userPhotos],
+            models: [User, Posts, Coments, Chats, Messages, Genders, userPhotos, genderPhotos],
             autoLoadModels: true
 
         }),
@@ -56,7 +58,8 @@ envFilePath: `.${process.env.NODE_ENV}.env`
         MessagesModule,
         GendersModule,
         userPhotosModule,
-        FilesModule
+        FilesModule,
+        genderPhotosModule
     ]
 })
 export class AppModule {}

@@ -5,13 +5,14 @@ import { Genders} from './genders.model';
 import { User } from 'src/users/users.model';
 import { GendersController } from './genders.controller';
 import { Messages } from 'src/messages/messages.model';
+import { genderPhotos } from 'src/genderPhotos/genderPhotos.model';
 
 
 @Module({
   providers: [GendersService],
   controllers: [GendersController],
   imports: [
-    SequelizeModule.forFeature([Genders, User])
+    SequelizeModule.forFeature([Genders, User, genderPhotos])
   ]
 })
 export class GendersModule {}

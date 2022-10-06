@@ -1,5 +1,4 @@
 import { UsersService } from './users/users.service';
-
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { SequelizeModule } from "@nestjs/sequelize";
@@ -10,7 +9,6 @@ import { Posts } from "./posts/posts.model";
 import { ComentsModule } from "./coments/coments.module";
 import { Coments } from "./coments/coments.model";
 import { AuthModule } from './auth/auth.module';
-import { UsersInfoModule } from './users-info/users-info.module';
 import { FollowersModule } from './followers/followers.module';
 import { ChatsModule } from './chats/chats.module';
 import { Chats } from './chats/chats.model';
@@ -52,7 +50,6 @@ envFilePath: `.${process.env.NODE_ENV}.env`
         PostsModule,
         ComentsModule,
         AuthModule,
-        UsersInfoModule,
         FollowersModule,
         ChatsModule,
         MessagesModule,

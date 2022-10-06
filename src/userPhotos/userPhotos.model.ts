@@ -6,6 +6,7 @@ import { User } from "src/users/users.model";
 
 interface userPhotosCreationAttr {
     user_id: number;
+    photo: string;
 }
 
 @Table({tableName: 'userPhotos'})

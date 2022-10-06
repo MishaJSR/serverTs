@@ -12,9 +12,9 @@ export class userPhotosService {
 
     }
 
-    async createUser(dto: createuserPhotosDto, image: any){
-        const fileName = this.fileService.createFile(image);
-        const post = await this.userPhotosRepository.create({...dto, image: fileName});
+    async createUser(dto: createuserPhotosDto, photo: any){
+        const fileName = await this.fileService.createFile(photo);
+        const post = await this.userPhotosRepository.create({...dto, photo: fileName});
         return post;
     }
 

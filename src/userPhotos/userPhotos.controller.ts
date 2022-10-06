@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { createuserPhotosDto } from './dto/create.userPhotos.dto';
 import { deleteuserPhotosDto } from './dto/delete.userPhotos.dto';
@@ -14,8 +15,10 @@ export class userPhotosController {
     @ApiOperation({summary: 'Создание поста'})
     @ApiResponse({status: 200, type: userPhotos})
     @Post()
-    create(@Body() userDto: createuserPhotosDto){
-        return this.userPhotosService.createUser(userDto)
+    @UseInterceptors(FileInterceptor('photo'))
+    create(@Body() userDto: createuserPhotosDto,
+    @UploadedFile() photo){
+        return this.userPhotosService.createUser(userDto, photo)
     }
 
     @ApiOperation({summary: 'Удаление поста'})

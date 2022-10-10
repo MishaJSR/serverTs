@@ -18,6 +18,12 @@ export class userPhotosService {
         return post;
     }
 
+    async createUserAva(user_id: number, filename: any, isAva: boolean){
+        const post = await this.userPhotosRepository.create({user_id, photo: filename, isAva: isAva});
+        return post;
+    }
+
+
     async deleteUser(dto: deleteuserPhotosDto){
         const post = await this.userPhotosRepository.destroy({
             where: {

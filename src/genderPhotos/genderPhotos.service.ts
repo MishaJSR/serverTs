@@ -17,6 +17,7 @@ export class genderPhotosService {
         const post = await this.genderPhotosRepository.create({...dto, photo_gender: fileName});
         return post;
     }
+    
 
     async deleteUser(dto: deletegenderPhotosDto){
         const post = await this.genderPhotosRepository.destroy({

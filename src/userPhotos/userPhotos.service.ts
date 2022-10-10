@@ -1,5 +1,5 @@
 import { deleteuserPhotosDto } from './dto/delete.userPhotos.dto';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { userPhotos } from './userPhotos.model';
 import { FilesService } from 'src/files/files.service';
@@ -17,9 +17,22 @@ export class userPhotosService {
         return post;
     }
 
-    async createUserAva(user_id: number, filename: any, isAva: boolean){
-        const post = await this.userPhotosRepository.create({user_id, photo: filename, isAva: isAva});
-        return post;
+    async createUserAva(user_id: number, filename: any){
+        const user = await this.userPhotosRepository.findOne({ where: { isAva: true } })
+        if (user) {
+            user.isAva = false;
+            user.save();
+            const post = await this.userPhotosRepository.create({user_id, photo: filename});
+            post.isAva = true;
+            post.save();
+            return post;
+        } else {
+            const post = await this.userPhotosRepository.create({user_id, photo: filename});
+            post.isAva = true;
+            post.save();
+            return post;
+        }
+
     }
 
 

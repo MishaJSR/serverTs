@@ -22,7 +22,7 @@ export class UsersService {
 
     async createAva(id: number, photo: any){
         const fileName = await this.fileService.createFile(photo);
-        const userph = await this.userPhotosService.createUserAva(id, fileName, true);
+        const userph = await this.userPhotosService.createUserAva(id, fileName);
         const user = await this.userRepository.findByPk(id);
         user.ava = fileName;
         await user.save();

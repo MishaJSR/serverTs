@@ -7,15 +7,25 @@ import { Posts } from 'src/posts/posts.model';
 import { Chats } from 'src/chats/chats.model';
 import { Genders } from 'src/genders/genders.model';
 import { userPhotos } from 'src/userPhotos/userPhotos.model';
+import { FilesService } from 'src/files/files.service';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectModel(User) private userRepository: typeof User){
+    constructor(@InjectModel(User) private userRepository: typeof User,
+    private fileService: FilesService){
 
     }
 
     async createUser(dto: createUserDto){
         const user = await this.userRepository.create(dto);
+        return user;
+    }
+
+    async createAva(id: number, photo: string){
+        const fileName = await this.fileService.createFile(photo);
+        const user = await this.userRepository.findByPk(id);
+        user.ava = fileName;
+        await user.save();
         return user;
     }
 

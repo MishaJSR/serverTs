@@ -1,9 +1,10 @@
 import { deleteUserDto } from './dto/delete.user.dto';
 import { UsersService } from './users.service';
 import { createUserDto } from './dto/create.user.dto';
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './users.model';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Пользователи')
 @Controller('users')
@@ -15,6 +16,15 @@ export class UsersController {
     @Post()
     create(@Body() userDto: createUserDto){
         return this.userService.createUser(userDto)
+    }
+
+    @ApiOperation({summary: 'Создание поста'})
+    @ApiResponse({status: 200, type: User})
+    @Post('/createAva/:id')
+    @UseInterceptors(FileInterceptor('photo'))
+    createAva(@Param('id') id: number,
+    @UploadedFile() photo){
+        return this.userService.createAva(id, photo)
     }
 
 

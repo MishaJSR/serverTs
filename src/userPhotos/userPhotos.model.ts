@@ -24,6 +24,10 @@ export class userPhotos extends Model<userPhotos, userPhotosCreationAttr>{
     @Column({type: DataType.STRING, allowNull: true})
     photo: string;
 
+    @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
+    @Column({type: DataType.BOOLEAN, defaultValue: false})
+    isAva: boolean;
+
     @BelongsTo(() => User)
     author: User
 

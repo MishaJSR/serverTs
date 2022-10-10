@@ -3,6 +3,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { userPhotos } from './userPhotos.model';
 import { FilesService } from 'src/files/files.service';
+import { createuserPhotosDto } from './dto/create.userPhotos.dto';
 
 @Injectable()
 export class userPhotosService {
@@ -11,9 +12,11 @@ export class userPhotosService {
 
     }
 
-    async createUser(user_id: number, photo: any){
+    async createUser(dto: createuserPhotosDto, photo: any){
         const fileName = await this.fileService.createFile(photo);
-        const post = await this.userPhotosRepository.create({user_id, photo: fileName});
+        const post = await this.userPhotosRepository.create({...dto, photo: fileName});
+        post.isAva = false;
+        post.save();
         return post;
     }
 

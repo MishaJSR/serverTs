@@ -1,7 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
-import { Coments } from "src/coments/coments.model";
-import { Messages } from "src/messages/messages.model";
 import { User } from "src/users/users.model";
 
 interface userPhotosCreationAttr {

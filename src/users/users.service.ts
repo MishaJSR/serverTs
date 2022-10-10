@@ -4,10 +4,8 @@ import { createUserDto } from './dto/create.user.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './users.model';
 import { Injectable } from '@nestjs/common';
-import { Posts } from 'src/posts/posts.model';
 import { Chats } from 'src/chats/chats.model';
 import { Genders } from 'src/genders/genders.model';
-import { userPhotos } from 'src/userPhotos/userPhotos.model';
 import { FilesService } from 'src/files/files.service';
 
 @Injectable()
@@ -45,12 +43,6 @@ export class UsersService {
             include: [{
               model: Chats
             },
-            {
-                model: Posts
-              },
-              {
-                model: userPhotos
-              },
               {
                 model: Genders
               }]

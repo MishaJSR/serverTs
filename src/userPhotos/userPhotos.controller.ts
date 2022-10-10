@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { createuserPhotosDto } from './dto/create.userPhotos.dto';
 import { deleteuserPhotosDto } from './dto/delete.userPhotos.dto';
 import { userPhotos } from './userPhotos.model';
 import { userPhotosService } from './userPhotos.service';

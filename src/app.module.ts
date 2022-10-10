@@ -4,10 +4,6 @@ import { ConfigModule } from "@nestjs/config";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { User } from "./users/users.model";
 import { UsersModule } from './users/users.module';
-import { PostsModule } from './posts/posts.module';
-import { Posts } from "./posts/posts.model";
-import { ComentsModule } from "./coments/coments.module";
-import { Coments } from "./coments/coments.model";
 import { AuthModule } from './auth/auth.module';
 import { FollowersModule } from './followers/followers.module';
 import { ChatsModule } from './chats/chats.module';
@@ -42,13 +38,11 @@ envFilePath: `.${process.env.NODE_ENV}.env`
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Posts, Coments, Chats, Messages, Genders, userPhotos, genderPhotos],
+            models: [User, Chats, Messages, Genders, userPhotos, genderPhotos],
             autoLoadModels: true
 
         }),
         UsersModule,
-        PostsModule,
-        ComentsModule,
         AuthModule,
         FollowersModule,
         ChatsModule,

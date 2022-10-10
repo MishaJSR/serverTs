@@ -2,7 +2,6 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Chats } from "src/chats/chats.model";
 import { Genders } from "src/genders/genders.model";
-import { Posts } from "src/posts/posts.model";
 import { userPhotos } from "src/userPhotos/userPhotos.model";
 
 interface UserCreationAttr {
@@ -37,10 +36,6 @@ export class User extends Model<User, UserCreationAttr>{
     @ApiProperty({example: 'Andrey', description: 'AVA пользователя'})
     @Column({type: DataType.STRING, defaultValue: ""})
     ava: string;
-
-
-    @HasMany(() => Posts)
-    posts: Posts[];
 
     @HasMany(() => Chats)
     chats: Chats[];

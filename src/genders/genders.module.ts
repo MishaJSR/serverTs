@@ -4,7 +4,6 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Genders} from './genders.model';
 import { User } from 'src/users/users.model';
 import { GendersController } from './genders.controller';
-import { Messages } from 'src/messages/messages.model';
 import { genderPhotos } from 'src/genderPhotos/genderPhotos.model';
 
 

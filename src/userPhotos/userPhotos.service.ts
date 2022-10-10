@@ -1,5 +1,4 @@
 import { deleteuserPhotosDto } from './dto/delete.userPhotos.dto';
-import { createuserPhotosDto } from './dto/create.userPhotos.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { userPhotos } from './userPhotos.model';

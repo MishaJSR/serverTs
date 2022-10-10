@@ -1,9 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
-import { Coments } from "src/coments/coments.model";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import { Genders } from "src/genders/genders.model";
-import { Messages } from "src/messages/messages.model";
-import { User } from "src/users/users.model";
 
 interface genderPhotosCreationAttr {
     gender_id: number;

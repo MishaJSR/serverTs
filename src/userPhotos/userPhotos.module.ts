@@ -4,8 +4,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { userPhotos} from './userPhotos.model';
 import { User } from 'src/users/users.model';
 import {  userPhotosController } from './userPhotos.controller';
-import { Messages } from 'src/messages/messages.model';
 import { FilesModule } from 'src/files/files.module';
+import { UsersModule } from 'src/users/users.module';
 
 
 @Module({
@@ -14,6 +14,7 @@ import { FilesModule } from 'src/files/files.module';
   imports: [
     SequelizeModule.forFeature([userPhotos, User]),
     FilesModule
-  ]
+  ],
+  exports: [userPhotosService]
 })
 export class userPhotosModule {}

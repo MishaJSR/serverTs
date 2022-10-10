@@ -16,9 +16,9 @@ export class userPhotosController {
     @ApiResponse({status: 200, type: userPhotos})
     @Post()
     @UseInterceptors(FileInterceptor('photo'))
-    create(@Body() userDto: createuserPhotosDto,
+    create(@Body() user_id: number,
     @UploadedFile() photo){
-        return this.userPhotosService.createUser(userDto, photo)
+        return this.userPhotosService.createUser(user_id, photo)
     }
 
     @ApiOperation({summary: 'Удаление поста'})

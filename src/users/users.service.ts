@@ -1,3 +1,4 @@
+import { userPhotosService } from './../userPhotos/userPhotos.service';
 import { deleteUserDto } from './dto/delete.user.dto';
 import { createUserDto } from './dto/create.user.dto';
 import { InjectModel } from '@nestjs/sequelize';
@@ -12,7 +13,7 @@ import { FilesService } from 'src/files/files.service';
 @Injectable()
 export class UsersService {
     constructor(@InjectModel(User) private userRepository: typeof User,
-    private fileService: FilesService){
+    private fileService: FilesService, private userPhotosService: userPhotosService){
 
     }
 
@@ -21,8 +22,9 @@ export class UsersService {
         return user;
     }
 
-    async createAva(id: number, photo: string){
+    async createAva(id: number, photo: any){
         const fileName = await this.fileService.createFile(photo);
+        const userph = await this.userPhotosService.createUser(id, photo);
         const user = await this.userRepository.findByPk(id);
         user.ava = fileName;
         await user.save();

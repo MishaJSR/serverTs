@@ -20,7 +20,8 @@ export class Chats extends Model<Chats, ChatCreationAttr>{
     one_id: number;
 
     @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
-    @Column({type: DataType.STRING, allowNull: true})
+    @ForeignKey(() => User)
+    @Column({type: DataType.INTEGER, allowNull: true})
     two_id: number;
 
 

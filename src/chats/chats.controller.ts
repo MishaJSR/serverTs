@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Chats } from './chats.model';
 import { ChatsService } from './chats.service';
@@ -29,5 +29,12 @@ export class ChatsController {
     @Get()
     getAll() {
         return this.chatsService.getAllUsers()
+    }
+
+    @ApiOperation({summary: 'Получение всей информации о друзьях пользователя'})
+    @ApiResponse({status: 200, type: [Chats]})
+    @Get('/:id')
+    getChatById(@Param('id') id: number) {
+        return this.chatsService.getChatById(id);
     }
 }

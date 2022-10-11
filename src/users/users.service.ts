@@ -1,3 +1,5 @@
+import { Messages } from './../messages/messages.model';
+import { userPhotos } from './../userPhotos/userPhotos.model';
 import { userPhotosService } from './../userPhotos/userPhotos.service';
 import { deleteUserDto } from './dto/delete.user.dto';
 import { createUserDto } from './dto/create.user.dto';
@@ -56,7 +58,22 @@ export class UsersService {
     }
 
     async getUserById(id: number) {
-        const user = await this.userRepository.findOne({include: {all: true},where: {id: id}})
+        const user = await this.userRepository.findOne({include: [{
+            model: Chats,  include: [{
+                model: Messages
+              },
+              {
+                model: User
+              }
+            ]
+          },
+            {
+              model: Genders
+            },
+            {
+                model: userPhotos
+              }],
+            where: {id: id}})
         return user;
     }
 

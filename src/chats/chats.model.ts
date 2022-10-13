@@ -14,20 +14,22 @@ export class Chats extends Model<Chats, ChatCreationAttr>{
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
-    @ApiProperty({example: '112', description: 'Указатель айди расположения поста'})
+    @ApiProperty({example: 'Первый айди', description: ''})
     @ForeignKey(() => User)
     @Column({type: DataType.INTEGER, allowNull: false})
     one_id: number;
 
-    @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
+    @ApiProperty({example: 'Второй айди', description: ''})
     @ForeignKey(() => User)
     @Column({type: DataType.INTEGER, allowNull: true})
     two_id: number;
 
 
+    // @BelongsTo(() => User,  { as: 'one', foreignKey: 'one_id' })
+    // author1: User
 
-    @BelongsTo(() => User)
-    author: User
+    // @BelongsTo(() => User, { as: 'two', foreignKey: 'two_id' })
+    // author2: User
 
     @HasMany(() => Messages)
     messages: Messages[];

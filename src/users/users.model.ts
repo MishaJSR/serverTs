@@ -40,6 +40,7 @@ export class User extends Model<User, UserCreationAttr>{
     @HasMany(() => Chats)
     chats: Chats[];
 
+
     @HasMany(() => Genders)
     genders: Genders[];
 

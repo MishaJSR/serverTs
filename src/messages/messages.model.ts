@@ -20,7 +20,7 @@ export class Messages extends Model<Messages, MessagesCreationAttr>{
     id_List: number;
 
     @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
-    @Column({type: DataType.STRING, allowNull: true})
+    @Column({type: DataType.INTEGER, allowNull: true})
     id_Adder: number;
 
     

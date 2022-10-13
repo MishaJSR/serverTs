@@ -42,12 +42,14 @@ export class UsersService {
 
     async getAllUsers(){
         const users = await this.userRepository.findAll({
+            attributes: {exclude: ['password']},
             include: [{
               model: Chats, as: 'chats'
             },
               {
                 model: Genders
-              }]
+              }],
+              
           })
         return users;
     }

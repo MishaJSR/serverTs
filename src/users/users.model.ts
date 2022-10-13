@@ -37,9 +37,11 @@ export class User extends Model<User, UserCreationAttr>{
     @Column({type: DataType.STRING, defaultValue: ""})
     ava: string;
 
-    @HasMany(() => Chats)
+    @HasMany(() => Chats, 'one_id')
     chats: Chats[];
 
+    @HasMany(() => Chats, 'two_id')
+    chats2: Chats[];
 
     @HasMany(() => Genders)
     genders: Genders[];

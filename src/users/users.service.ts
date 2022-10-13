@@ -43,7 +43,7 @@ export class UsersService {
     async getAllUsers(){
         const users = await this.userRepository.findAll({
             include: [{
-              model: Chats
+              model: Chats, as: 'chats'
             },
               {
                 model: Genders
@@ -58,15 +58,7 @@ export class UsersService {
     }
 
     async getUserById(id: number) {
-        const user = await this.userRepository.findOne({include: [{
-            model: Chats,  include: [{
-                model: Messages
-              },
-              {
-                model: User
-              }
-            ]
-          },
+        const user = await this.userRepository.findOne({include: [
             {
               model: Genders
             },

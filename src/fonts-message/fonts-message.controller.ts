@@ -28,6 +28,13 @@ export class FontsMessageController {
         return this.fontsMessageService.deleteUser(deleteDto)
     }
 
+    @ApiOperation({summary: 'Удаление поста'})
+    @ApiResponse({status: 200})
+    @Post('/new')
+    createUserNull(@Body() userDto: createfontsPhotoDto){
+        return this.fontsMessageService.createUserNull(userDto, "")
+    }
+
     @ApiOperation({summary: 'Получение всех постов'})
     @ApiResponse({status: 200, type: [fontsMessage]})
     @Get()

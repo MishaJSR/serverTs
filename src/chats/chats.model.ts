@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { fontsMessage } from "src/fonts-message/fontsMessage.model";
 import { Messages } from "src/messages/messages.model";
 import { User } from "src/users/users.model";
 
@@ -29,4 +30,8 @@ export class Chats extends Model<Chats, ChatCreationAttr>{
 
     @HasMany(() => Messages)
     messages: Messages[]
+
+    @HasMany(() => fontsMessage)
+    fontsMessage: fontsMessage[]
+
 }

@@ -37,4 +37,11 @@ export class ChatsController {
     getChatById(@Param('id') id: number) {
         return this.chatsService.getChatById(id);
     }
+
+    @ApiOperation({summary: 'Получение всей информации о друзьях пользователя'})
+    @ApiResponse({status: 200, type: [Chats]})
+    @Get('/user/:id')
+    getChatByUserId(@Param('id') id: number) {
+        return this.chatsService.getChatByUserId(id);
+    }
 }

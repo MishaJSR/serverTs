@@ -12,7 +12,7 @@ export class fontsMessageService {
     private fileService: FilesService){
 
     }
-
+11
     async createUser(dto: createfontsPhotoDto, photo_font: any){
         const fileName = await this.fileService.createFile(photo_font);
         const post = await this.fontsMessageRepository.create({...dto, photo_font: fileName});

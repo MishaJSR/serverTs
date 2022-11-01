@@ -1,8 +1,10 @@
+import { createCountMessageDto } from './dto/create.countmessages.dto copy';
 import { deleteMessageDto } from './dto/delete.messages.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { createMessageDto } from './dto/create.messages.dto';
 import { Messages } from './messages.model';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class MessagesService {
@@ -28,4 +30,26 @@ export class MessagesService {
         const post = await this.messagesRepository.findAll();
         return post;
     }
+
+    async setRead(id: number) {
+        const mess = await this.messagesRepository.findByPk(id)
+        mess.isRead = true;
+        mess.save();
+        return mess;
+    }
+
+    async getUnreadMess(userDto: createCountMessageDto) {
+        const post = await this.messagesRepository.findAll({
+            where: {
+                [Op.and]: [
+                    { id_List: userDto.id_List },
+                    { id_Adder: {[Op.ne]: userDto.id_Adder} },
+                    { isRead: {[Op.ne]: true} }
+                  ]
+            }
+        });
+        return post;
+    }
+
+    
 }

@@ -8,7 +8,7 @@ interface MessagesCreationAttr {
     text: string
 }
 
-@Table({tableName: 'messages'})
+@Table({tableName: 'messages', })
 export class Messages extends Model<Messages, MessagesCreationAttr>{
     @ApiProperty({example: '1', description: 'Уникальный идентификатор'})
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
@@ -27,6 +27,10 @@ export class Messages extends Model<Messages, MessagesCreationAttr>{
     @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
     @Column({type: DataType.STRING, allowNull: true})
     text: string;
+
+    @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
+    @Column({type: DataType.BOOLEAN, defaultValue: false})
+    isRead: boolean;
 
 
     @BelongsTo(() => Chats)

@@ -41,8 +41,8 @@ envFilePath: `.${process.env.NODE_ENV}.env`
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
             models: [User, Chats, Messages, Genders, userPhotos, genderPhotos, fontsMessage],
-            autoLoadModels: true
-
+            autoLoadModels: true,
+            
         }),
         UsersModule,
         AuthModule,

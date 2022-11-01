@@ -27,7 +27,7 @@ export class MessagesService {
     }
 
     async getAllUsers(){
-        const post = await this.messagesRepository.findAll();
+        const post = await this.messagesRepository.findAll({order: [['createdAt', 'DESC']]});
         return post;
     }
 

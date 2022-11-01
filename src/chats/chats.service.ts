@@ -1,11 +1,12 @@
+import { Messages } from './../messages/messages.model';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { fontsMessageService } from 'src/fonts-message/fonts-message.service';
-import { Messages } from 'src/messages/messages.model';
 import { Chats } from './chats.model';
 import {  createChatDto } from './dto/create.chats.dto';
 import {  deleteChatDto } from './dto/delete.chats.dto';
+import { User } from 'src/users/users.model';
 
 @Injectable()
 export class ChatsService {
@@ -36,15 +37,30 @@ export class ChatsService {
     }
 
     async getChatById(id: number) {
-        const user = await this.chatRepository.findAll({include: {all: true},where: {id: id}})
+        const user = await this.chatRepository.findAll({include: [{
+              model: Messages,
+              as: 'messages', 
+            },
+            {
+                model: User,
+                as: 'oneID', 
+              },
+              {
+                model: User,
+                as: 'twoID', 
+              },
+        ],
+            order: [['messages','createdAt', 'ASC']],
+            where: {id: id}})
         return user;
     }
     
     async getChatByUserId(id: number) {
-        const user = await this.chatRepository.findAll({include: {all: true},where: {
+        const user = await this.chatRepository.findAll({include: {all: true}, where: {
             [Op.or]: [{one_id: id}, {two_id: id}]
           }})
         return user;
     }
+    
     
 }

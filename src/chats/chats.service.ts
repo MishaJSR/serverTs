@@ -1,3 +1,4 @@
+import { setReadChatDto } from './dto/setRead.dto';
 import { Messages } from './../messages/messages.model';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
@@ -33,6 +34,22 @@ export class ChatsService {
         const post = await this.chatRepository.findAll({
             include: {all: true}
           })
+        return post;
+    }
+
+    async setAllRead(dto: setReadChatDto){
+        const post = await this.chatRepository.findAll({
+            include: {
+                model: Messages, 
+                where: {
+                    [Op.and]: [
+                    {isRead: false},
+                    {id_Adder: {[Op.ne]: dto.id_Adder}}
+                ]}
+          },
+        where: {id: dto.id_List}
+    })
+        post[0].messages.map((e) => {e.isRead = true; e.save()})
         return post;
     }
 

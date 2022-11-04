@@ -1,3 +1,4 @@
+import { setReadChatDto } from './dto/setRead.dto';
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Chats } from './chats.model';
@@ -45,4 +46,14 @@ export class ChatsController {
     getChatByUserId(@Param('id') id: number) {
         return this.chatsService.getChatByUserId(id);
     }
+
+
+    @ApiOperation({summary: 'Получение всей информации о друзьях пользователя'})
+    @ApiResponse({status: 200, type: [Chats]})
+    @Post('/setRead')
+    setAllRead(@Body() userDto: setReadChatDto) {
+        return this.chatsService.setAllRead(userDto);
+    }
+
+    
 }

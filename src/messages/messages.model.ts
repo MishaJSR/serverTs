@@ -32,7 +32,6 @@ export class Messages extends Model<Messages, MessagesCreationAttr>{
     @Column({type: DataType.BOOLEAN, defaultValue: false})
     isRead: boolean;
 
-
     @BelongsTo(() => Chats)
     chats: Chats
 

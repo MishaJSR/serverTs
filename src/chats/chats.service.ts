@@ -37,19 +37,7 @@ export class ChatsService {
     }
 
     async getChatById(id: number) {
-        const user = await this.chatRepository.findAll({include: [{
-              model: Messages,
-              as: 'messages', 
-            },
-            {
-                model: User,
-                as: 'oneID', 
-              },
-              {
-                model: User,
-                as: 'twoID', 
-              },
-        ],
+        const user = await this.chatRepository.findAll({include: {all: true},
             order: [['messages','createdAt', 'ASC']],
             where: {id: id}})
         return user;

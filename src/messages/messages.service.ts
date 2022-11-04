@@ -48,7 +48,7 @@ export class MessagesService {
                   ]
             }
         });
-        return post;
+        return post.length;
     }
 
     

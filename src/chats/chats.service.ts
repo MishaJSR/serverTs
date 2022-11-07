@@ -62,7 +62,7 @@ export class ChatsService {
     
     async getChatByUserId(id: number) {
         const user = await this.chatRepository.findAll({include: {all: true},
-            order: [['updatedAt','DESC']],
+            order: [['messages','createdAt', 'DESC'], ['updatedAt','DESC']],
             where: {
             [Op.or]: [{one_id: id}, {two_id: id}]
           }})

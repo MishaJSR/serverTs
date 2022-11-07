@@ -15,6 +15,10 @@ export class Chats extends Model<Chats, ChatCreationAttr>{
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
+    @ApiProperty({example: 'Мой пост', description: 'Текст поста'})
+    @Column({type: DataType.STRING, allowNull: true})
+    checkUpdate: string;
+
     @ApiProperty({example: 'Первый айди', description: ''})
     @Column({type: DataType.INTEGER, allowNull: false})
     @ForeignKey(() => User)

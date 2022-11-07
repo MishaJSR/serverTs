@@ -16,5 +16,6 @@ import { FontsMessageModule } from 'src/fonts-message/fonts-message.module';
     SequelizeModule.forFeature([Chats, User, Messages, fontsMessage]),
     FontsMessageModule
   ],
+  exports: [ChatsService]
 })
 export class ChatsModule {}

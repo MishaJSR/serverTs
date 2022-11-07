@@ -24,15 +24,15 @@ export class userPhotosService {
         const user = await this.userPhotosRepository.findOne({ where: { isAva: true } })
         if (user) {
             user.isAva = false;
-            user.save();
+            await user.save();
             const post = await this.userPhotosRepository.create({user_id, photo: filename});
             post.isAva = true;
-            post.save();
+            await post.save();
             return post;
         } else {
             const post = await this.userPhotosRepository.create({user_id, photo: filename});
             post.isAva = true;
-            post.save();
+            await post.save();
             return post;
         }
 

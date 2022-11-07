@@ -1,3 +1,4 @@
+import { ChatsService } from './../chats/chats.service';
 import { createCountMessageDto } from './dto/create.countmessages.dto copy';
 import { deleteMessageDto } from './dto/delete.messages.dto';
 import { Injectable } from '@nestjs/common';
@@ -8,12 +9,13 @@ import { Op } from 'sequelize';
 
 @Injectable()
 export class MessagesService {
-    constructor(@InjectModel(Messages) private messagesRepository: typeof Messages){
+    constructor(@InjectModel(Messages) private messagesRepository: typeof Messages,  private chatsService: ChatsService){
 
     }
 
     async createUser(dto: createMessageDto){
         const post = await this.messagesRepository.create(dto);
+        const chat = await this.chatsService.getOneChatId(dto.id_List);
         return post;
     }
 
@@ -34,7 +36,7 @@ export class MessagesService {
     async setRead(id: number) {
         const mess = await this.messagesRepository.findByPk(id)
         mess.isRead = true;
-        mess.save();
+        await mess.save();
         return mess;
     }
 

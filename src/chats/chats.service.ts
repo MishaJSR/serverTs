@@ -61,9 +61,18 @@ export class ChatsService {
     }
     
     async getChatByUserId(id: number) {
-        const user = await this.chatRepository.findAll({include: {all: true}, where: {
+        const user = await this.chatRepository.findAll({include: {all: true},
+            order: [['updatedAt','DESC']],
+            where: {
             [Op.or]: [{one_id: id}, {two_id: id}]
           }})
+        return user;
+    }
+
+    async getOneChatId(id: number) {
+        const user = await this.chatRepository.findByPk(id);
+        user.checkUpdate = "ssds";
+        await user.save();
         return user;
     }
     

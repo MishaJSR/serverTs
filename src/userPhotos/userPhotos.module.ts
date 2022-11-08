@@ -5,7 +5,6 @@ import { userPhotos} from './userPhotos.model';
 import { User } from 'src/users/users.model';
 import {  userPhotosController } from './userPhotos.controller';
 import { FilesModule } from 'src/files/files.module';
-import { UsersModule } from 'src/users/users.module';
 
 
 @Module({

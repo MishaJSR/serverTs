@@ -5,7 +5,8 @@ import { Chats } from "src/chats/chats.model";
 interface MessagesCreationAttr {
     id_List: number;
     id_Adder: number;
-    text: string
+    text: string,
+    photo_mess: string;
 }
 
 @Table({tableName: 'messages', })
@@ -32,9 +33,10 @@ export class Messages extends Model<Messages, MessagesCreationAttr>{
     @Column({type: DataType.BOOLEAN, defaultValue: false})
     isRead: boolean;
 
+    @Column({type: DataType.STRING, allowNull: true})
+    photo_mess: string;
+
     @BelongsTo(() => Chats)
     chats: Chats
 
-    // @HasMany(() => Coments)
-    // coments: Coments[];
 }

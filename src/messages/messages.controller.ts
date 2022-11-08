@@ -1,21 +1,25 @@
 import { createCountMessageDto } from './dto/create.countmessages.dto copy';
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {  MessagesService } from './messages.service';
 import {  createMessageDto } from './dto/create.messages.dto';
 import {  deleteMessageDto } from './dto/delete.messages.dto';
 import { Messages } from './messages.model';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Чаты')
 @Controller('messages')
 export class MessagesController {
     constructor(private messagesService: MessagesService) {}
 
+
     @ApiOperation({summary: 'Создание поста'})
     @ApiResponse({status: 200, type: Messages})
     @Post()
-    create(@Body() userDto: createMessageDto){
-        return this.messagesService.createUser(userDto)
+    @UseInterceptors(FileInterceptor('photo_mess'))
+    create(@Body() userDto: createMessageDto, 
+    @UploadedFile() photo_mess){
+        return this.messagesService.createUser(userDto, photo_mess)
     }
 
     @ApiOperation({summary: 'Удаление поста'})

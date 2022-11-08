@@ -1,3 +1,4 @@
+import { FilesModule } from 'src/files/files.module';
 import { Module } from '@nestjs/common';
 import { MessagesService} from './messages.service';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -14,7 +15,8 @@ import { fontsMessage } from 'src/fonts-message/fontsMessage.model';
   controllers: [MessagesController],
   imports: [
     SequelizeModule.forFeature([Messages, Chats, fontsMessage]),
-    ChatsModule
-  ]
+    ChatsModule, FilesModule
+  ],
+  exports: [MessagesService]
 })
 export class MessagesModule {}
